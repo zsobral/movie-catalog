@@ -1,6 +1,6 @@
 version: '2.4'
 
-services: 
+services:
   server:
     build:
       context: .
@@ -9,7 +9,7 @@ services:
         - PORT=3000
     command: nodemon index.js
     ports:
-      - "3000:3000"
+      - '3000:3000'
     volumes:
       - .:/opt/node_app/app:delegated
       - notused:/opt/node_app/node_modules
@@ -17,7 +17,7 @@ services:
   docs:
     image: redocly/redoc:v2.0.0-rc.8-1
     ports:
-      - "3001:80"
+      - '3001:80'
     volumes:
       - ./src/openapi.yml:/usr/share/nginx/html/openapi.yml
     environment:
@@ -25,3 +25,4 @@ services:
 
 volumes:
   notused:
+    driver: local
