@@ -1,4 +1,4 @@
-FROM node:10-alpine
+FROM node:10
 
 ARG NODE_ENV=production
 ARG PORT=3000
@@ -24,4 +24,4 @@ HEALTHCHECK --interval=30s CMD node healthcheck.js
 WORKDIR /opt/node_app/app
 COPY . .
 
-CMD ["node", "index.js"]
+CMD ["node", "src/index.js"]

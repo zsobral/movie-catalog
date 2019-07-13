@@ -2,14 +2,16 @@
 
 const express = require('express');
 
+const usersController = require('./users/users-controller');
+
 const app = express();
+
+app.use(express.json());
 
 app.get('/healthz', (req, res) => {
   res.send("I'm okay!");
 });
 
-app.get('/number', (req, res) => {
-  res.json({ number: Math.random() * 10 });
-});
+app.use(usersController);
 
 module.exports = app;

@@ -6,13 +6,22 @@ services:
       context: .
       args:
         - NODE_ENV=development
-        - PORT=3000
-    command: nodemon index.js
+        - PORT=$PORT
+    command: nodemon src/index.js
     ports:
-      - '3000:3000'
+      - '$PORT:$PORT'
     volumes:
       - .:/opt/node_app/app:delegated
       - notused:/opt/node_app/node_modules
+    env_file: .env
+
+  mongo:
+    image: mongo:4
+
+  mongo-express:
+    image: mongo-express
+    ports:
+      - '8081:8081'
 
   docs:
     image: redocly/redoc:v2.0.0-rc.8-1
