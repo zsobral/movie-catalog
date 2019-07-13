@@ -1,0 +1,32 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Movie Catalog
+  contact:
+    name: Mateus Sobral Monteiro
+    email: mateus@mateus.dev
+  license:
+    name: MIT
+servers:
+  - url: http://localhost:3000
+tags:
+  - name: Number
+    description: get numbers
+paths:
+  /number:
+    get:
+      tags:
+        - Number
+      summary: A random number
+      responses:
+        '200':
+          description: number
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  number:
+                    type: integer
+
+        
