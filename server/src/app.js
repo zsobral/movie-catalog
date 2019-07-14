@@ -3,6 +3,7 @@
 const express = require('express');
 
 const usersController = require('./users/users-controller');
+const moviesController = require('./movies/movies-controller');
 
 const app = express();
 
@@ -13,5 +14,6 @@ app.get('/healthz', (req, res) => {
 });
 
 app.use(usersController);
+app.use(moviesController);
 
 module.exports = app;

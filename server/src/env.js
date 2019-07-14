@@ -8,4 +8,4 @@ const assertEnvVars = keys => {
   });
 };
 
-assertEnvVars(['MONGO_URL', 'JWT_PRIVATE_KEY']);
+assertEnvVars(['MONGO_URL', 'JWT_PRIVATE_KEY', 'OMDB_API_KEY']);
