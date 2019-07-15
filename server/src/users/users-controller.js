@@ -28,7 +28,10 @@ router.post(
           .status(401)
           .json({ error: { msg: 'password does not match' } });
       }
-      const token = usersService.signJwt({ id: user.id });
+      const token = usersService.signJwt({
+        id: user.id,
+        username: user.username,
+      });
       res.json({ token });
     } catch (error) {
       console.error(error);
@@ -38,7 +41,7 @@ router.post(
 );
 
 router.get('/users/check', [authGuard], async (req, res) => {
-  res.json({ message: 'ok' });
+  res.json({ msg: 'ok' });
 });
 
 module.exports = router;

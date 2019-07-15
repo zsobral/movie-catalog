@@ -81,7 +81,7 @@ router.patch(
         trailerUrl: req.body.trailerUrl,
       });
       if (!movieId) {
-        return res.status(404).json({ error: { message: 'movie not found' } });
+        return res.status(404).json({ error: { msg: 'movie not found' } });
       }
       res.json({ id: movieId });
     } catch (error) {

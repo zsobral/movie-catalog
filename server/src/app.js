@@ -7,13 +7,18 @@ const moviesController = require('./movies/movies-controller');
 
 const app = express();
 
+app.disable('x-powered-by');
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(require('cors')());
+}
+
 app.use(express.json());
 
-app.get('/healthz', (req, res) => {
+app.get('/api/healthz', (req, res) => {
   res.send("I'm okay!");
 });
 
-app.use(usersController);
-app.use(moviesController);
+app.use('/api', [usersController, moviesController]);
 
 module.exports = app;
