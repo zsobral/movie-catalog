@@ -17,6 +17,8 @@ services:
 
   mongo:
     image: mongo:4
+    volumes:
+      - db-data:/data/db
 
   mongo-express:
     image: mongo-express
@@ -34,4 +36,4 @@ services:
 
 volumes:
   notused:
-    driver: local
+  db-data:
