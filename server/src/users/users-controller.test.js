@@ -22,25 +22,25 @@ afterAll(async () => {
   await database.connection.close();
 });
 
-describe('POST /users/sign-in', () => {
+describe('POST /api/users/sign-in', () => {
   it('should return 422 when missing any required body', async () => {
     await request(app)
-      .post('/users/sign-in')
+      .post('/api/users/sign-in')
       .send({})
       .expect(422);
     await request(app)
-      .post('/users/sign-in')
+      .post('/api/users/sign-in')
       .send({ username: 'test' })
       .expect(422);
     await request(app)
-      .post('/users/sign-in')
+      .post('/api/users/sign-in')
       .send({ password: '1234' })
       .expect(422);
   });
 
   it('should return 401 with invalid credentials', async () => {
     await request(app)
-      .post('/users/sign-in')
+      .post('/api/users/sign-in')
       .send({ username: 'wrong', password: 'wrong' })
       .expect(401);
   });
@@ -48,7 +48,7 @@ describe('POST /users/sign-in', () => {
   it('should return a valid jwt token with valid credentials', async () => {
     let token;
     await request(app)
-      .post('/users/sign-in')
+      .post('/api/users/sign-in')
       .send(user)
       .expect(200)
       .expect(res => {
@@ -56,14 +56,16 @@ describe('POST /users/sign-in', () => {
         token = res.body.token;
       });
     await request(app)
-      .get('/users/check')
+      .get('/api/users/check')
       .set('Authorization', `Bearer ${token}`)
       .expect(200);
   });
+});
 
+describe('GET /api/users/check', () => {
   it('should return 401 with invalid jwt', async () => {
     await request(app)
-      .get('/users/check')
+      .get('/api/users/check')
       .set('Authorization', `Bearer 123`)
       .expect(401);
   });

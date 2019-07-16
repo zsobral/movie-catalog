@@ -23,7 +23,8 @@ exports.create = async ({
     posterUrl,
   });
   const result = await movie.save();
-  return result._id;
+  const { _id, ...doc } = result.toObject();
+  return { id: _id, ...doc };
 };
 
 exports.update = async (
@@ -42,10 +43,11 @@ exports.update = async (
   movie.actors = actors || movie.actors;
   movie.plot = plot || movie.plot;
   movie.trailerUrl = trailerUrl || movie.trailerUrl;
-  movie.posterUrl = posterUrl || movie.trailerUrl;
+  movie.posterUrl = posterUrl || movie.posterUrl;
 
   const result = await movie.save();
-  return result._id;
+  const { _id, ...doc } = result.toObject();
+  return { id: _id, ...doc };
 };
 
 exports.findAll = async () => {
@@ -60,6 +62,25 @@ exports.findAll = async () => {
     trailerUrl: movie.trailerUrl,
     posterUrl: movie.posterUrl,
   }));
+};
+
+exports.findById = async id => {
+  const movie = await Movie.findById(id).exec();
+
+  if (!movie) {
+    return null;
+  }
+
+  return {
+    id: movie.id,
+    title: movie.title,
+    genres: movie.genres,
+    releaseDate: movie.releaseDate,
+    actors: movie.actors,
+    plot: movie.plot,
+    trailerUrl: movie.trailerUrl,
+    posterUrl: movie.posterUrl,
+  };
 };
 
 exports.findOmdbMovie = async search => {

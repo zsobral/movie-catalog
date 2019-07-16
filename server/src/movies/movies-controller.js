@@ -19,6 +19,19 @@ router.get('/movies', async (req, res) => {
   }
 });
 
+router.get('/movies/:id', async (req, res) => {
+  try {
+    const movie = await moviesServices.findById(req.params.id);
+    if (!movie) {
+      return res.status(404).json({ error: { msg: 'resource not found' } });
+    }
+    res.json(movie);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
+
 router.post(
   '/movies',
   [
@@ -39,7 +52,7 @@ router.post(
   ],
   async (req, res) => {
     try {
-      const movieId = await moviesServices.create({
+      const movie = await moviesServices.create({
         title: req.body.title,
         genres: req.body.genres,
         releaseDate: req.body.releaseDate,
@@ -48,7 +61,7 @@ router.post(
         trailerUrl: req.body.trailerUrl,
         posterUrl: req.body.posterUrl,
       });
-      res.status(201).json({ id: movieId });
+      res.status(201).json(movie);
     } catch (error) {
       console.error(error);
       res.sendStatus(500);
@@ -71,7 +84,7 @@ router.patch(
   ],
   async (req, res) => {
     try {
-      const movieId = await moviesServices.update(req.params.id, {
+      const movie = await moviesServices.update(req.params.id, {
         actors: req.body.actors,
         genres: req.body.genres,
         plot: req.body.plot,
@@ -80,10 +93,10 @@ router.patch(
         title: req.body.title,
         trailerUrl: req.body.trailerUrl,
       });
-      if (!movieId) {
+      if (!movie) {
         return res.status(404).json({ error: { msg: 'movie not found' } });
       }
-      res.json({ id: movieId });
+      res.json(movie);
     } catch (error) {
       console.error(error);
       res.sendStatus(500);

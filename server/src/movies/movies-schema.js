@@ -12,4 +12,6 @@ const moviesSchema = new mongoose.Schema({
   posterUrl: { type: String, required: true },
 });
 
+moviesSchema.set('toObject', { versionKey: false });
+
 module.exports = mongoose.model('Movies', moviesSchema);
