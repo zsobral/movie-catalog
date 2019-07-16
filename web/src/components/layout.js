@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled/macro';
 
-import { Navbar, NavbarBrand } from './navbar';
-
 const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -28,20 +26,19 @@ const StyledBody = styled.div`
 `;
 
 const Layout = ({ children }) => {
-  return (
-    <StyledWrapper>
-      <StyledHeader>
-        <StyledContainer>
-          <Navbar>
-            <NavbarBrand>Movie Catalog</NavbarBrand>
-          </Navbar>
-        </StyledContainer>
-      </StyledHeader>
-      <StyledBody>
-        <StyledContainer>{children}</StyledContainer>
-      </StyledBody>
-    </StyledWrapper>
-  );
+  return <StyledWrapper>{children}</StyledWrapper>;
 };
 
-export default Layout;
+const LayoutHeader = ({ children }) => (
+  <StyledHeader>
+    <StyledContainer>{children}</StyledContainer>
+  </StyledHeader>
+);
+
+const LayoutBody = ({ children }) => (
+  <StyledBody>
+    <StyledContainer>{children}</StyledContainer>
+  </StyledBody>
+);
+
+export { Layout, LayoutHeader, LayoutBody };

@@ -1,21 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { FieldControl } from './field-control';
 import { Input } from './input';
+import { TextArea } from './text-area';
 
-const InputField = ({ label, field, form, ...props }) => {
+const createField = Component => ({ label, field, form, ...props }) => {
   return (
     <FieldControl label={label}>
-      <Input {...field} {...props} />
+      <Component {...field} {...props} />
     </FieldControl>
   );
 };
 
-InputField.propTypes = {
-  label: PropTypes.string.isRequired,
-  field: PropTypes.object,
-  form: PropTypes.object,
-};
+const InputField = createField(Input);
+const TextAreaField = createField(TextArea);
 
-export { InputField };
+export { InputField, TextAreaField };

@@ -1,6 +1,4 @@
-import React from 'react';
 import styled from '@emotion/styled/macro';
-import PropTypes from 'prop-types';
 
 const StyledNavbar = styled.div`
   width: 100%;
@@ -13,6 +11,11 @@ const StyledNavbar = styled.div`
 const StyledBrand = styled.div`
   font-size: 16px;
   font-weight: bold;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 `;
 
 const StyledItems = styled.div`
@@ -21,41 +24,21 @@ const StyledItems = styled.div`
 `;
 
 const StyledItem = styled.div`
+  cursor: pointer;
+  transition: color 200ms ease-in-out;
+
+  &:hover {
+    color: #2688ff;
+  }
+
   & + & {
     margin-left: 16px;
   }
 `;
 
-const Navbar = ({ children }) => {
-  return <StyledNavbar>{children}</StyledNavbar>;
+export {
+  StyledNavbar as Navbar,
+  StyledBrand as NavbarBrand,
+  StyledItems as NavbarItems,
+  StyledItem as NavbarItem,
 };
-
-Navbar.propTypes = {
-  children: PropTypes.node,
-};
-
-const NavbarBrand = ({ children }) => {
-  return <StyledBrand>{children}</StyledBrand>;
-};
-
-NavbarBrand.propTypes = {
-  children: PropTypes.node,
-};
-
-const NavbarItem = ({ children }) => {
-  return <StyledItem>{children}</StyledItem>;
-};
-
-NavbarItem.propTypes = {
-  children: PropTypes.node,
-};
-
-const NavbarItems = ({ children }) => {
-  return <StyledItems>{children}</StyledItems>;
-};
-
-NavbarItems.propTypes = {
-  children: PropTypes.node,
-};
-
-export { Navbar, NavbarBrand, NavbarItems, NavbarItem };

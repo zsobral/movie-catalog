@@ -5,9 +5,11 @@ import { useUser } from '../contexts/user-context';
 
 const GuestRoute = props => {
   const [state] = useUser();
+  const isAuthenticated = state.token !== null;
 
-  if (state.token !== null) {
-    return <Redirect to="/" />;
+  if (isAuthenticated) {
+    const { from } = props.location.state || { from: { pathname: '/' } };
+    return <Redirect to={from} />;
   }
 
   return <Route {...props} />;
@@ -15,9 +17,12 @@ const GuestRoute = props => {
 
 const PrivateRoute = props => {
   const [state] = useUser();
+  const isAuthenticated = state.token !== null;
 
-  if (state.token === null) {
-    return <Redirect to="/login" />;
+  if (!isAuthenticated) {
+    return (
+      <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+    );
   }
 
   return <Route {...props} />;

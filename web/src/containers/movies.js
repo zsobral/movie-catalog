@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styled from '@emotion/styled/macro';
 
-import { MovieCard } from '../components/movie-card';
 import breakpoints from '../breakpoints';
-import * as api from '../api';
+import { useMovies } from '../contexts/movies-context';
+import { MovieCard } from '../components/movie-card';
 
 const StyledGrid = styled.div`
   display: grid;
@@ -21,20 +22,21 @@ const StyledGrid = styled.div`
 `;
 
 const Movies = () => {
-  const [movies, setMovies] = useState([]);
+  const [state, actions] = useMovies();
 
   useEffect(() => {
-    api.getMovies().then(movies => setMovies(movies));
-  }, []);
+    actions.getMovies();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <StyledGrid>
-      {movies.map(movie => (
-        <MovieCard
-          key={movie.id}
-          posterUrl={movie.posterUrl}
-          alt={movie.title}
-        />
+      {state.allIds.map(id => (
+        <Link key={id} style={{ display: 'flex' }} to={`/movies/${id}`}>
+          <MovieCard
+            posterUrl={state.byId[id].posterUrl}
+            alt={state.byId[id].title}
+          />
+        </Link>
       ))}
     </StyledGrid>
   );

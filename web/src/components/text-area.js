@@ -1,6 +1,6 @@
 import styled from '@emotion/styled/macro';
 
-const StyledInput = styled.input`
+const StyledTextArea = styled.textarea`
   background-color: #f3f3f3;
   border: none;
   font-size: 16px;
@@ -17,4 +17,4 @@ const StyledInput = styled.input`
   }
 `;
 
-export { StyledInput as Input };
+export { StyledTextArea as TextArea };

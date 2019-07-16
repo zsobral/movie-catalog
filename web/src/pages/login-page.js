@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Layout from '../components/layout';
+import Layout from '../containers/layout';
 import LoginForm from '../containers/login-form';
 
 const LoginPage = () => (
@@ -14,7 +14,7 @@ const LoginPage = () => (
         border: '1px solid rgba(0, 0, 0, 0.2)',
       }}
     >
-      <h1>Login</h1>
+      <h1 style={{ marginTop: 0 }}>Login</h1>
       <LoginForm />
     </div>
   </Layout>
