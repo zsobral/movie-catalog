@@ -48,3 +48,6 @@ inside the folder `/web` run `npm install` then `npm start`
 to edit the movies go to the page `/login` and login with the username `admin` and password `admin`
 
 `npm test` to run the tests
+
+![home page](https://i.imgur.com/b1u4uGW.jpg)
+![logan movie page](https://i.imgur.com/QLF6s9H.jpg)
