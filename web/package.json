@@ -8,7 +8,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "precommit": "lint-staged && CI=true npm test",
+    "lint": "eslint --fix . --ext .js",
+    "prettier": "prettier --write src/**/*.js"
   },
   "prettier": {
     "singleQuote": true,
@@ -31,11 +34,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged && CI=true npm test"
-    }
   },
   "lint-staged": {
     "*.{yml,css,json,js}": [
@@ -69,7 +67,6 @@
     "@storybook/react": "^5.1.9",
     "@testing-library/jest-dom": "^4.0.0",
     "@testing-library/react": "^8.0.5",
-    "husky": "^3.0.0",
     "lint-staged": "^9.2.0",
     "prettier": "^1.18.2"
   },
