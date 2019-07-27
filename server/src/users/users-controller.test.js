@@ -7,6 +7,8 @@ const app = require('../app');
 const User = require('./users-schema');
 const usersServices = require('./users-service');
 
+process.env.JWT_PRIVATE_KEY = 'randomstring';
+
 const user = {
   username: 'admin',
   password: 'admin',
