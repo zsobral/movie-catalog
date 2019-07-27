@@ -12,7 +12,9 @@ const LoginForm = () => {
   return (
     <>
       {userState.error && (
-        <Alert style={{ marginBottom: 16 }}>{userState.error}</Alert>
+        <Alert data-testid="login-error" style={{ marginBottom: 16 }}>
+          {userState.error}
+        </Alert>
       )}
       <Formik
         initialValues={{
@@ -38,7 +40,9 @@ const LoginForm = () => {
               type="password"
               component={InputField}
             />
-            <Button type="submit">Login</Button>
+            <Button type="submit" data-testid="login-btn">
+              Login
+            </Button>
           </form>
         )}
       />
